@@ -1,6 +1,6 @@
 # Livestories Search Bar
 
-A small vanilla search bar to consume locations and topics search options
+A small vanilla search bar to consume locations and their topics
 
 ## Installation and running
 
