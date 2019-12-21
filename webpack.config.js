@@ -2,6 +2,7 @@
 const path = require('path')
 
 var webpack = require('webpack');
+var package = require('./package.json')
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -15,7 +16,7 @@ module.exports = {
     ],
     output: {
       path: path.join(__dirname, 'dist'),
-      filename: '[name].bundle.js'
+      filename: `${package.name}-${package.version}.bundle.js`
     },
     module: {
       rules: [
