@@ -2,6 +2,8 @@
 
 A small vanilla search bar to consume locations and topics search options
 
+![](demo.gif)
+
 ## Installation and running
 
 ```bash
