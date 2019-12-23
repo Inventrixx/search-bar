@@ -6,10 +6,22 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script type="text/javascript" async></script>
   </head>
   <body>
-    <!-- This ID is used to define where we want to create the search bar -->
-    <div id= <%=htmlWebpackPlugin.options.searchIdBar %> </div>
+    <div id="search-bar-ls">
+      <form>
+        <input
+          id="locations-ls-selector"
+          type="text"
+          placeholder="Enter: city, county, state, or zip"
+        />
+        <select id="topic">
+          <option class="topic-disabled" value="" selected disabled
+            >All Topics</option
+          >
+        </select>
+        <button id="go" type="submit">Go</button>
+      </form>
+    </div>
   </body>
 </html>
