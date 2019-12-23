@@ -35,8 +35,35 @@
   color: gray;
 }
 
+select {
+  /* make arrow and background */
+
+  background: linear-gradient(45deg, transparent 50%, #119eb9 50%),
+    linear-gradient(135deg, #119eb9, 50%, transparent 50%);
+  /* linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255)); */
+  background-position: calc(100% - 16px) calc(-0.3em + 10px),
+    calc(100% - 9px) calc(-0.3em + 10px), 100% 0;
+  background-size: 7px 7px, 7px 7px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  padding: 0.2em;
+
+  /* styling and reset */
+
+  border: thin solid blue;
+
+  /* reset */
+
+  border-radius: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 #go {
   border: none;
+  height: 20px;
   border-radius: 3px;
   background-color: #119eb9;
   color: white;
