@@ -33,17 +33,13 @@ var DATA = {
 
 var LOCATIONS_NAMES = DATA.locations.map(x => x.name);
 
-var APP_CONTAINER_ID = "search-bar-ls";
+fragment = new DocumentFragment();
 
-function createLocationInput(TopicsComponent) {
-  var component_id = "locations-ls-selector";
-
-  var locations = document.createElement("input");
-  locations.setAttribute("id", component_id);
-  locations.setAttribute("placeholder", "Enter: city, county, state, or zip");
+function addAutoComplete() {
+  var searchLocations = document.getElementById("locations-ls-selector");
 
   var autocomplete = new autoComplete({
-    selector: locations,
+    selector: searchLocations,
     minChars: 2,
     source: function(term, suggest) {
       term = term.toLowerCase();
@@ -65,36 +61,8 @@ function createLocationInput(TopicsComponent) {
       });
     }
   });
-
-  return locations;
-}
-
-function createTopicInput() {
-  var dropdown = document.createElement("select");
-  dropdown.setAttribute("id", "topic");
-  var placeholderOption = document.createElement("option");
-  placeholderOption.appendChild(document.createTextNode("All Topics"));
-  placeholderOption.disabled;
-  dropdown.append(placeholderOption);
-  return dropdown;
-}
-
-function createActionBtn() {
-  var btn = document.createElement("input");
-  btn.setAttribute("id", "go");
-  btn.setAttribute("type", "button");
-  btn.value = "Go";
-  return btn;
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  var topics = createTopicInput();
-  var locations = createLocationInput(topics);
-  var btn = createActionBtn();
-
-  var app = document.getElementById(APP_CONTAINER_ID);
-
-  app.append(locations);
-  app.append(topics);
-  app.append(btn);
+  addAutoComplete();
 });
