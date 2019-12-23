@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script type="text/javascript" async></script>
   </head>
   <body>
-  <!-- This ID is used to define where we want to create the search bar -->
-  <div id="search-bar-ls"></div>
+    <!-- This ID is used to define where we want to create the search bar -->
+    <div id= <%=htmlWebpackPlugin.options.searchIdBar %> </div>
   </body>
 </html>
