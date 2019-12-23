@@ -33,15 +33,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "LS Search Bar",
       inject: "body",
-      template: "src/index.html",
-      searchIdBar: "search-bar-ls"
+      template: "src/index.html"
     })
   ],
   devtool: "source-map",
   devServer: {
     writeToDisk: true,
     compress: true,
-    port: 3000,
+    port: 3002,
     hot: true
   }
 };
