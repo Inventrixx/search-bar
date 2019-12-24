@@ -31,17 +31,6 @@ function addAutoComplete() {
             for (i = 0; i < choices.length; i++)
                 if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i])
             suggest(matches)
-        },
-        onSelect(event, term, item) {
-            const location = DATA.locations.find(x => x.name === term)
-
-            TopicsComponent.innerHTML = null
-
-            location.topics.forEach(element => {
-                const option = document.createElement("option")
-                option.text = element
-                TopicsComponent.add(option)
-            })
         }
     })
 }
@@ -64,16 +53,16 @@ function addTopicDropDown() {
 
     const topics = [
         {
-            indicatortopic: "Citizenship"
+            indicatortopic: "Immigration Overview And Trends"
         },
         {
-            indicatortopic: "Disabled"
+            indicatortopic: "Gun Firearm Violence Deaths Mortality"
         },
         {
-            indicatortopic: "Hispanic"
+            indicatortopic: "No physical activity"
         },
         {
-            indicatortopic: "Immigration"
+            indicatortopic: "Transportation"
         }
     ]
 
@@ -119,7 +108,7 @@ function addTopicDropDown() {
         topics.forEach(topic => {
             const { indicatortopic } = topic
             const option = document.createElement("div")
-            option.addEventListener("click", () => selectOption(name))
+            option.addEventListener("click", () => selectOption(indicatortopic))
             const n = document.createElement("span")
             n.textContent = indicatortopic
             option.appendChild(n)
@@ -136,9 +125,9 @@ function addTopicDropDown() {
         input.classList.toggle("input__active")
     }
 
-    const selectOption = name => {
+    const selectOption = indicatortopic => {
         const text = document.querySelector(".placeholder")
-        text.textContent = name
+        text.textContent = indicatortopic
         text.classList.add("input__selected")
         toggleDropdown()
     }
@@ -146,7 +135,23 @@ function addTopicDropDown() {
     dropdown()
 }
 
+function addPageRedirect() {
+    document.getElementById("go").addEventListener("click", function() {
+        const baseUrl = "https://www.livestories.com"
+        const location = this.form.elements[0].value.toLowerCase().replace(/ /g, "-")
+        const topic = document
+            .getElementsByClassName("input__selected")[0]
+            .innerText.toLowerCase()
+            .replace(/ /g, "-")
+        const mockedUrlSlug = `${baseUrl}/${location}/${topic}`
+        
+        window.location(mockedUrlSlug)
+        
+    })
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
     addAutoComplete()
     addTopicDropDown()
+    addPageRedirect()
 })
