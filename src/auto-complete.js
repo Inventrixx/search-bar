@@ -296,14 +296,14 @@ var autoComplete = (function() {
         }
     }
     return autoComplete
-})()(
-    //TODO: export it as module and consume it on index.js to include it in the mini-bundle
-    function() {
-        if (typeof define === "function" && define.amd)
-            define("autoComplete", function() {
-                return autoComplete
-            })
-        else if (typeof module !== "undefined" && module.exports) module.exports = autoComplete
-        else window.autoComplete = autoComplete
-    }
-)()
+})()
+
+//TODO: export it as module and consume it on index.js to include it in the mini-bundle
+;(function() {
+    if (typeof define === "function" && define.amd)
+        define("autoComplete", function() {
+            return autoComplete
+        })
+    else if (typeof module !== "undefined" && module.exports) module.exports = autoComplete
+    else window.autoComplete = autoComplete
+})()
