@@ -1,27 +1,23 @@
 <!-- Template used by webpack to create the index.html at the /dist folder -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  </head>
-  <body>
-    <div id="search-bar-ls">
-      <form>
-        <input
-          id="locations-ls-selector"
-          type="text"
-          placeholder="Enter: city, county, state, or zip"
-        />
-        <select id="topic">
-          <option class="topic-disabled" value="" selected disabled
-            >All Topics</option
-          >
-        </select>
-        <button id="go" type="submit">Go</button>
-      </form>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    </head>
+    <body>
+        <div id="search-bar-ls">
+            <form class="form-wrapper">
+                <input
+                    id="locations-ls-selector"
+                    type="text"
+                    placeholder="Enter: city, county, state, or zip"
+                />
+                <div id="content"></div>
+                <button id="go" type="submit">Go</button>
+            </form>
+        </div>
+    </body>
 </html>
