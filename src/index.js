@@ -1,6 +1,7 @@
 async function locationHandler(value) {
     const baseUrl = "https://www.livestories.com/"
-    const hardcodedDomain = "T:L:C<US>:CO,T:L:C<US>:PL,T:L:C<US>:ST"
+    //const hardcodedDomain = "T:L:C<US>:CO,T:L:C<US>:PL,T:L:C<US>:ST"
+    const hardcodedDomain = "T:L:C<US>:ST"
     const hardcodedUrl = `${baseUrl}locale/search?value=${value}&domain=${hardcodedDomain}`
 
     try {
@@ -53,16 +54,40 @@ function addTopicDropDown() {
 
     const topics = [
         {
-            indicatortopic: "Immigration Overview And Trends"
+            indicatortopic: "Transportation Commute"
         },
         {
-            indicatortopic: "Gun Firearm Violence Deaths Mortality"
+            indicatortopic: "Marriage Demographics"
         },
         {
-            indicatortopic: "No physical activity"
+            indicatortopic: "Children"
         },
         {
-            indicatortopic: "Transportation"
+            indicatortopic: "Median Age Demographics"
+        },
+        {
+            indicatortopic: "Veteran Demographic"
+        },
+        {
+            indicatortopic: "Housing Unit Occupancy"
+        },
+        {
+            indicatortopic: "Families Structure Composition"
+        },
+        {
+            indicatortopic: "Language"
+        },
+        {
+            indicatortopic: "Fertility New Mother Demographic"
+        },
+        {
+            indicatortopic: "Educational Attainment"
+        },
+        {
+            indicatortopic: "Geographic Mobility Demographics"
+        },
+        {
+            indicatortopic: "Population Demographics"
         }
     ]
 
@@ -136,17 +161,18 @@ function addTopicDropDown() {
 }
 
 function addPageRedirect() {
-    document.getElementById("go").addEventListener("click", function() {
-        const baseUrl = "https://www.livestories.com"
+    document.getElementById("go").addEventListener("click", function(e) {
+        e.preventDefault()
+        const baseUrl = "https://www.livestories.com/statistics"
         const location = this.form.elements[0].value.toLowerCase().replace(/ /g, "-")
         const topic = document
             .getElementsByClassName("input__selected")[0]
             .innerText.toLowerCase()
             .replace(/ /g, "-")
         const mockedUrlSlug = `${baseUrl}/${location}/${topic}`
-        
-        window.location(mockedUrlSlug)
-        
+
+        window.location.replace(mockedUrlSlug)
+        return false
     })
 }
 
