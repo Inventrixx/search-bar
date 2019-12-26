@@ -56,7 +56,10 @@ var autoComplete = (function() {
                     "</div>"
                 )
             },
-            onSelect: function(e, term, item) {}
+            onSelect: function(e, term, item) {
+                this.selector.value = term
+                this.selector.setAttribute('data-term', term)
+            }
         }
         for (var k in options) {
             if (options.hasOwnProperty(k)) o[k] = options[k]

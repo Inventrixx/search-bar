@@ -1,13 +1,14 @@
+let globalLocales = []
 async function locationHandler(value) {
     const baseUrl = "https://www.livestories.com/"
     //const hardcodedDomain = "T:L:C<US>:CO,T:L:C<US>:PL,T:L:C<US>:ST"
-    const hardcodedDomain = "T:L:C<US>:ST"
+    const hardcodedDomain = "T:L:C<US>:CO,T:L:C<US>:ST"
     const hardcodedUrl = `${baseUrl}locale/search?value=${value}&domain=${hardcodedDomain}`
-
     try {
         const response = await fetch(hardcodedUrl)
         const locales = await response.json()
-        return locales.map(i => i.name)
+        globalLocales = [...locales]
+        return locales
     } catch (e) {
         console.error(e)
     }
@@ -27,7 +28,10 @@ function addAutoComplete() {
         minChars: 2,
         source: async function(term, suggest) {
             term = term.toLowerCase()
-            const choices = await locationHandler(term)
+            //const choices = await locationHandler(term)
+            const receivedLocations = await locationHandler(term)
+            const choices = receivedLocations.map(i => i.label)
+
             const matches = []
             for (i = 0; i < choices.length; i++)
                 if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i])
@@ -164,12 +168,30 @@ function addPageRedirect() {
     document.getElementById("go").addEventListener("click", function(e) {
         e.preventDefault()
         const baseUrl = "https://www.livestories.com/statistics"
-        const location = this.form.elements[0].value.toLowerCase().replace(/ /g, "-")
+        //const location = this.form.elements[0].value.toLowerCase().replace(/ /g, "-")
+        const dataTerm = this.form.elements[0].getAttribute("data-term")
         const topic = document
             .getElementsByClassName("input__selected")[0]
             .innerText.toLowerCase()
             .replace(/ /g, "-")
-        const mockedUrlSlug = `${baseUrl}/${location}/${topic}`
+
+        const location = globalLocales.filter(item => item.label === dataTerm)
+
+        // only for states Arizona, Alabama , California and etc:
+        if (location[0].type.name === "State") {
+            const locationSlug = location[0].name.toLowerCase().replace(/ /g, "-")
+            const mockedUrlSlug = `${baseUrl}/${locationSlug}/${topic}`
+            window.location.replace(mockedUrlSlug)
+            return false
+        } else {
+            const locationSlug = location[0].name.toLowerCase().replace(/ /g, "-")
+            const locationStateSlug = location[0].containers[0].name.toLowerCase()
+            // for counties and etc
+            const mockedUrlSlug = `${baseUrl}/${locationStateSlug}/${locationSlug}-${topic}`
+
+            window.location.replace(mockedUrlSlug)
+            return false
+        }
 
         window.location.replace(mockedUrlSlug)
         return false
